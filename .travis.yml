@@ -1,0 +1,24 @@
+language: generic
+
+install:
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b -p $HOME/miniconda
+  - export PATH=$HOME/miniconda/bin:$PATH
+  - conda update --yes -q conda
+  - conda config --set always_yes true
+  - conda config --set anaconda_upload no
+  - conda install -q pip conda-build anaconda-client
+
+script:
+  - conda build -c conda-forge recipe
+
+after_success:
+  - chmod +x ./conda_upload.sh
+
+deploy:
+  - provider: script
+    script: ./conda_upload.sh
+    on:
+      tags: true
+    skip_cleanup: true
