@@ -11,7 +11,7 @@ install:
   - conda install -q pip conda-build anaconda-client
 
 script:
-  - conda build recipe
+  - conda build -c conda-forge recipe
 
 after_success:
   - chmod +x ./conda_upload.sh
