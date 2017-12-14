@@ -16,6 +16,9 @@ build:
 requirements:
   build:
     - perl 5.22.2.1  # [not win]
+    - openmpi 2.0.*
+  run:
+    - openmpi 2.0.*
 
 about:
   home: http://fftw.org
